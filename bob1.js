@@ -1,3 +1,10 @@
+/* v0
+Handles:
+- arbitrary tags
+- whitespace
+- arbitrary levels of nesting
+*/
+
 const util = require('util')
 
 let code = `<a>
