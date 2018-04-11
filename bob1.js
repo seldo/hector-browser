@@ -1,4 +1,4 @@
-/* v0
+/* v1
 Handles:
 - arbitrary tags
 - whitespace
