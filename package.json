@@ -1,0 +1,25 @@
+{
+  "name": "browser",
+  "version": "1.0.0",
+  "description": "This is a series of iterations of a very simple web browser called Bob. At the moment it's just a parser and a DOM tree generator, but maybe it'll get better, who knows? Everybody's got to start somewhere.",
+  "main": "bob0.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "brew install pkg-config cairo libpng jpeg giflib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seldo/hector-browser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seldo/hector-browser/issues"
+  },
+  "homepage": "https://github.com/seldo/hector-browser#readme",
+  "dependencies": {
+    "canvas": "^1.6.11",
+    "console-png": "^1.2.1",
+    "printf": "^0.3.0"
+  }
+}
