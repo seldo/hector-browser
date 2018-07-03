@@ -11,7 +11,7 @@ const util = require('util')
 const Canvas = require('canvas')
 const cpng = require('console-png')
 const fs = require('fs')
-const exec = require('child_process').exec;
+const exec = require('child_process').execSync;
 
 let code = `<html>
   <head>
@@ -171,12 +171,7 @@ function render(tree) {
   ctx.lineTo(50 + te.width, 102);
   ctx.stroke();
   
-  fs.writeFileSync('./out.png',canvas.toBuffer())
-  exec("./imgcat.sh out.png",(err,stdout,stderr) => {
-    console.log(err)
-    console.log(stderr)
-    console.log(stdout)
-  })
+  console.log(exec("./imgcat.sh",{input:canvas.toBuffer()}).toString())
 
 }
 
