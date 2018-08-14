@@ -5,6 +5,7 @@ Handles:
 - whitespace
 - arbitrary levels of nesting
 - self-closing tags
+- spits out arbitrary PNG
 */
 
 const util = require('util')
