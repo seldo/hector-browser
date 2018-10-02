@@ -9,16 +9,18 @@ const html =
       hello
     </div>
     <div>
-      <p>
+      <p class='foo' id='bar' data-attr='1'>
         world.
       </p>
     </div>
-    <h3>
-      okay?
+    <div>
+      <h3 name='heading-name'>
+        okay?
+      </h3>
       <h4>
         ok.
       </h4>
-    </h3>
+    </div>
   </body>
 </html>`
 

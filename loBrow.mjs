@@ -1,23 +1,31 @@
 import html from './data.mjs'
 import {
   formatString,
+  getAttributes,
   isEmptyString,
   logObj,
-  parseOpenBracket
+  parseOpenBracket,
+  removeSpaces
 } from './helperFunctions.mjs'
 
-/**
- * lv 0: predetermined tags
- */
-
 const getElements = str => {
+  // remove returns and spaces
   str = formatString(str)
-  str = parseOpenBracket(str)
-  str = str.filter(isEmptyString)
-  let tree = []
 
-  str = str.map((el) => {
-    if (el.substr(0, 1) === '/') {
+  // split string on open brackets
+  let htmlArr = parseOpenBracket(str)
+
+  // remove empty array elements
+  htmlArr = htmlArr.filter(isEmptyString)
+
+  console.log('htmlArr')
+  console.log(htmlArr)
+  
+  
+  // build arr of obj's; keys = els, values = types
+  let tree = []
+  htmlArr = htmlArr.map((el) => {
+    if (el.substring(0, 1) === '/') {
       el = el.slice(1, -1)
       tree.push({
         el,
@@ -31,13 +39,11 @@ const getElements = str => {
       })
     } else {
       el = el.split('>')
+      el[1] = removeSpaces(el[1])
       tree.push({
         el: el[0],
-        type: 'opening'
-      })
-      tree.push({
-        el: el[1],
-        type: 'content'
+        type: 'opening',
+        content: el[1] === '' ? null : el[1]
       })
     }
   })
@@ -45,7 +51,7 @@ const getElements = str => {
 }
 
 /**
-  * build DOM tree
+  * build DOM tree from `getElements` return value
   */
 const buildTree = arr => {
   let parsedHtml = []
@@ -56,7 +62,9 @@ const buildTree = arr => {
     switch (element.type) {
       case 'opening':
         parsedHtml.push({
-          name: element.el,
+          name: element.el.split(' ')[0],
+          content: element.content,
+          attributes: getAttributes(element.el),
           children: buildTree(arr)
         })
         break
@@ -74,7 +82,3 @@ const buildTree = arr => {
 }
 
 logObj(buildTree(getElements(html)))
-
-/**
- * lv 1: arbitrary tags
- */
